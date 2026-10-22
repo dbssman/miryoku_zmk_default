@@ -1,0 +1,25 @@
+# Copyright 2026
+# Battery-focused Corne build without displays.
+#
+# Defaults preserved:
+#   - nice_nano_v2
+#   - QWERTY alphas
+#   - default extra/tap/nav/clipboard/layers/mapping/custom_config
+#   - default ZMK branch and no extra modules
+#
+# Changes from the old nice!view build:
+#   - no nice_view_adapter / nice_view / nice_view_gem shields
+#   - CONFIG_ZMK_DISPLAY=n
+#   - CONFIG_ZMK_POINTING=y (mouse keys / pointer layer stay working)
+#   - deep sleep after 15 minutes idle, wake on key press
+
+name: 'Build Corne (battery, no display)'
+on: workflow_dispatch
+jobs:
+  build:
+    uses: ./.github/workflows/main.yml
+    secrets: inherit
+    with:
+      board: '["nice_nano_v2"]'
+      shield: '["corne_left","corne_right"]'
+      alphas: '["QWERTY"]'
