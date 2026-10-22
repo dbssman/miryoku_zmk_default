@@ -13,6 +13,10 @@
 #   - CONFIG_ZMK_POINTING=y (mouse keys / pointer layer stay working)
 #   - deep sleep after 15 minutes idle, wake on key press
 #
+# The board is the bare nice_nano hardware board, so the ZMK board
+# settings normally supplied by the nice_nano//zmk variant (BLE, USB,
+# flash/settings) are enabled explicitly below.
+#
 # The Kconfig is passed explicitly so the generated matrix.txt in each
 # artifact records the battery settings and the build stays reproducible.
 
@@ -26,4 +30,4 @@ jobs:
       board: '["nice_nano"]'
       shield: '["corne_left","corne_right"]'
       alphas: '["QWERTY"]'
-      kconfig: '["CONFIG_ZMK_DISPLAY=n\nCONFIG_ZMK_POINTING=y\nCONFIG_ZMK_IDLE_TIMEOUT=30000\nCONFIG_ZMK_SLEEP=y\nCONFIG_ZMK_IDLE_SLEEP_TIMEOUT=900000"]'
+      kconfig: '["CONFIG_ZMK_BLE=y\nCONFIG_ZMK_USB=y\nCONFIG_MPU_ALLOW_FLASH_WRITE=y\nCONFIG_NVS=y\nCONFIG_SETTINGS_NVS=y\nCONFIG_FLASH=y\nCONFIG_FLASH_PAGE_LAYOUT=y\nCONFIG_FLASH_MAP=y\nCONFIG_ZMK_DISPLAY=n\nCONFIG_ZMK_POINTING=y\nCONFIG_ZMK_IDLE_TIMEOUT=30000\nCONFIG_ZMK_SLEEP=y\nCONFIG_ZMK_IDLE_SLEEP_TIMEOUT=900000"]'
