@@ -2,7 +2,7 @@
 # Battery-focused Corne build without displays.
 #
 # Defaults preserved:
-#   - nice_nano_v2
+#   - nice_nano (current ZMK name; defaults to the v2 hardware revision)
 #   - QWERTY alphas
 #   - default extra/tap/nav/clipboard/layers/mapping/custom_config
 #   - default ZMK branch and no extra modules
@@ -20,6 +20,6 @@ jobs:
     uses: ./.github/workflows/main.yml
     secrets: inherit
     with:
-      board: '["nice_nano_v2"]'
+      board: '["nice_nano"]'
       shield: '["corne_left","corne_right"]'
       alphas: '["QWERTY"]'
