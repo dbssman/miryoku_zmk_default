@@ -2,7 +2,8 @@
 # Battery-focused Corne build without displays.
 #
 # Defaults preserved:
-#   - nice_nano (current ZMK name; defaults to the v2 hardware revision)
+#   - nice_nano//zmk (current ZMK board + variant; defaults to the v2
+#     hardware revision)
 #   - QWERTY alphas
 #   - default extra/tap/nav/clipboard/layers/mapping/custom_config
 #   - default ZMK branch and no extra modules
@@ -13,9 +14,11 @@
 #   - CONFIG_ZMK_POINTING=y (mouse keys / pointer layer stay working)
 #   - deep sleep after 15 minutes idle, wake on key press
 #
-# The board is the bare nice_nano hardware board, so the ZMK board
-# settings normally supplied by the nice_nano//zmk variant (BLE, USB,
-# flash/settings) are enabled explicitly below.
+# The //zmk variant is required. Without it Zephyr selects the bare
+# nice_nano hardware board, which has no zmk,battery chosen node, so
+# CONFIG_ZMK_BATTERY_REPORTING has no sensor to read and the host shows
+# no battery level. The variant also supplies the BLE/USB/flash settings
+# that are repeated explicitly below for reproducibility.
 #
 # The Kconfig is passed explicitly so the generated matrix.txt in each
 # artifact records the battery settings and the build stays reproducible.
@@ -27,7 +30,7 @@ jobs:
     uses: ./.github/workflows/main.yml
     secrets: inherit
     with:
-      board: '["nice_nano"]'
+      board: '["nice_nano//zmk"]'
       shield: '["corne_left","corne_right"]'
       alphas: '["QWERTY"]'
       kconfig: '["CONFIG_ZMK_BLE=y\nCONFIG_ZMK_USB=y\nCONFIG_MPU_ALLOW_FLASH_WRITE=y\nCONFIG_NVS=y\nCONFIG_SETTINGS_NVS=y\nCONFIG_FLASH=y\nCONFIG_FLASH_PAGE_LAYOUT=y\nCONFIG_FLASH_MAP=y\nCONFIG_ZMK_DISPLAY=n\nCONFIG_ZMK_POINTING=y\nCONFIG_ZMK_IDLE_TIMEOUT=30000\nCONFIG_ZMK_SLEEP=y\nCONFIG_ZMK_IDLE_SLEEP_TIMEOUT=900000"]'
